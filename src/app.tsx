@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Pet from "./pet.tsx";
+import SearchParams from "./searchParams.tsx";
 
 
 export interface IPetAttr {
@@ -26,6 +27,7 @@ function App() {
     {
       pets && (pets.map(({name, breed, animal}) => <Pet key={name} name={name} breed={breed} animal={animal}/>))
     }
+    <SearchParams />
   </div>)
 }
 
