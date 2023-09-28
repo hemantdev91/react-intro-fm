@@ -1,34 +1,29 @@
-import React, {useEffect, useState} from "react";
-import Pet from "./pet.tsx";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SearchParams from "./searchParams.tsx";
-
+import Details from "./Details.tsx";
 
 export interface IPetAttr {
   name: string;
   breed: string;
   animal: string;
+  images?: string[];
+  location: string;
+  id: string;
 }
 
-const staticPets = [
-  {name: "Luna", breed: "Havanese", animal: "Dog"},
-  {name: "Pepper", breed: "Cockatiel", animal: "Bird"},
-  {name: "Doink", breed: "Mix", animal: "Cat"},
-];
-
 function App() {
-  const [pets, setPets] = useState<IPetAttr[]>([]);
-
-
-  useEffect(() => {
-    setPets([...staticPets]);
-  }, [])
-  return (<div style={{marginLeft: "15px"}}>
-    <h1>Adopt me!!!</h1>
-    {
-      pets && (pets.map(({name, breed, animal}) => <Pet key={name} name={name} breed={breed} animal={animal}/>))
-    }
-    <SearchParams />
-  </div>)
+  return (
+    <BrowserRouter>
+      <div style={{ marginLeft: "15px" }}>
+        <h1>Adopt me!!!</h1>
+        <Routes>
+          <Route path="/details/:id" element={<Details />} />
+          <Route path="/" element={<SearchParams />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;

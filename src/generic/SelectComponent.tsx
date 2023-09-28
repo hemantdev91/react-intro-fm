@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface ISelectComponentProps {
-  options: ISelectOption[],
+  options: Array<ISelectOption>,
   label: string,
   selectId: string,
   changeHandlerFn: (val: string) => void,
@@ -9,7 +9,7 @@ export interface ISelectComponentProps {
   defaultValue?: string
 }
 
-interface ISelectOption {
+export interface ISelectOption {
   name: string,
   value: string
 }
@@ -18,11 +18,12 @@ function SelectComponent({options, label, selectId, changeHandlerFn, blurHandler
 
   return <div>
     <label htmlFor={selectId}>{label}</label>
-    <select id={selectId} onChange={(e) => {
+    <select disabled={!options?.length} id={selectId} onChange={(e) => {
       changeHandlerFn(e.target.value)
     }} onBlur={(e) => {
       blurHandlerFn(e.target.value)
     }} value={defaultValue}>
+      <option />
       {
         options && options.map(option => (
           <option key={option.value} value={option.value}>{option.name} </option>
